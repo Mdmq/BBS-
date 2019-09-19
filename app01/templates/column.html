@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    论|
+{% endblock %}
+{% block content %}
+    <h3>基于Django2.1开发的论坛</h3>
+    <div class="col-md-4">
+        <h4>版块</h4>
+        <ul>
+            {% for column in columns %}
+                <li><a href="{% url 'column_all' column_pk %}">2{{ column.name }}</a> </li>
+            {% empty %}
+                <li>wu</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

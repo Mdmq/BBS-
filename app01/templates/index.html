@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    论坛|
+{% endblock %}
+{% block nav_home_active %}active{% endblock %}
+{% block header_extends %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h3>基于Django2.1开发的论坛</h3>
+    <div class="hot-data">
+        <h3>今日热门</h3>
+        <ul>
+            {% for hot_data in today_hot_data %}
+                <li><a href="{% url 'topic_detail' hot_data.content_object.pk %}">
+                    {{ hot_data.content_object.title }}</a>({{ hot_data.read_num }})</li>
+            {% empty %}
+                <li>今天无</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="hot-data">
+        <h3>昨日热门</h3>
+    <ul>
+        {% for hot_data in yesterday_hot_data %}
+            <li><a href="{% url 'topic_detail' hot_data.content_object.pk %}">
+                {{ hot_data.content_object.title }}</a>({{ hot_data.read_num }})</li>
+        {% empty %}
+            <li>昨天无</li>
+        {% endfor %}
+    </ul>
+    </div>
+
+    <div class="container">
+    <div class="row">
+            <div class="col-md-3 col-lg-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">常去版块</div>
+                    <div class="panel-body">
+                        {% for type in types %}
+                            <li><a href="{% url 'column_all' type.pk %}">{{ type.name }}</a></li>
+                        {% empty %}
+                            <li>wu1</li>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+
+{% endblock %}
